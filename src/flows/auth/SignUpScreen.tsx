@@ -6,16 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { AuthShell } from "@/shared/ui/AuthShell";
-import { DatePicker } from "@/shared/ui/DatePicker";
 
 const requiredFields = [
   "first-name",
   "last-name",
   "signup-email",
-  "signup-phone",
-  "birth-date",
-  "signup-password",
   "address",
+  "signup-phone",
+  "signup-password",
 ] as const;
 
 type RequiredField = (typeof requiredFields)[number];
@@ -52,22 +50,18 @@ function RequiredInput({ field, invalidField, clearInvalidField, ...props }: Req
 export default function SignUpScreen() {
   const navigate = useNavigate();
   const [invalidField, setInvalidField] = useState<RequiredField | null>(null);
-  const [dateOfBirth, setDateOfBirth] = useState<Date>();
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const firstEmptyField = requiredFields.find((field) => {
-      if (field === "birth-date") return !dateOfBirth;
-      return !String(formData.get(field) ?? "").trim();
-    });
+    const firstEmptyField = requiredFields.find(
+      (field) => !String(formData.get(field) ?? "").trim(),
+    );
 
     if (firstEmptyField) {
       setInvalidField(firstEmptyField);
-      if (firstEmptyField !== "birth-date") {
-        const fieldControl = event.currentTarget.elements.namedItem(firstEmptyField);
-        if (fieldControl instanceof HTMLInputElement) fieldControl.focus();
-      }
+      const fieldControl = event.currentTarget.elements.namedItem(firstEmptyField);
+      if (fieldControl instanceof HTMLInputElement) fieldControl.focus();
       return;
     }
 
@@ -82,103 +76,110 @@ export default function SignUpScreen() {
       footer={
         <>
           Already have an account?{" "}
-          <Link to="/auth/sign-in" className="font-medium text-primary hover:underline">
+          <Link to="/auth/sign-in" className="font-bold text-foreground hover:underline">
             Sign in
           </Link>
         </>
       }
     >
-      <form className="space-y-5" noValidate onSubmit={submit}>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor="first-name">First name</Label>
+      <form className="flex flex-col gap-6" noValidate onSubmit={submit}>
+        <div className="flex flex-col gap-4">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-[13px] leading-4 font-semibold" htmlFor="first-name">
+                First name
+              </Label>
+              <RequiredInput
+                field="first-name"
+                invalidField={invalidField}
+                clearInvalidField={() => setInvalidField(null)}
+                id="first-name"
+                placeholder="Alex"
+                autoComplete="given-name"
+                className="h-10 px-3.5"
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label className="text-[13px] leading-4 font-semibold" htmlFor="last-name">
+                Last name
+              </Label>
+              <RequiredInput
+                field="last-name"
+                invalidField={invalidField}
+                clearInvalidField={() => setInvalidField(null)}
+                id="last-name"
+                placeholder="Morgan"
+                autoComplete="family-name"
+                className="h-10 px-3.5"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <Label className="text-[13px] leading-4 font-semibold" htmlFor="signup-email">
+              Email address
+            </Label>
             <RequiredInput
-              field="first-name"
+              field="signup-email"
               invalidField={invalidField}
               clearInvalidField={() => setInvalidField(null)}
-              id="first-name"
-              placeholder="Alex"
-              autoComplete="given-name"
+              id="signup-email"
+              type="email"
+              placeholder="alex@example.com"
+              autoComplete="email"
+              className="h-10 px-3.5"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="last-name">Last name</Label>
+
+          <div className="flex flex-col gap-1.5">
+            <Label className="text-[13px] leading-4 font-semibold" htmlFor="address">
+              Home address
+            </Label>
             <RequiredInput
-              field="last-name"
+              field="address"
               invalidField={invalidField}
               clearInvalidField={() => setInvalidField(null)}
-              id="last-name"
-              placeholder="Morgan"
-              autoComplete="family-name"
+              id="address"
+              placeholder="Street, city, postal code"
+              autoComplete="street-address"
+              className="h-10 px-3.5"
             />
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="signup-email">Email address</Label>
-          <RequiredInput
-            field="signup-email"
-            invalidField={invalidField}
-            clearInvalidField={() => setInvalidField(null)}
-            id="signup-email"
-            type="email"
-            placeholder="alex@example.com"
-            autoComplete="email"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="signup-phone">Phone number</Label>
-          <RequiredInput
-            field="signup-phone"
-            invalidField={invalidField}
-            clearInvalidField={() => setInvalidField(null)}
-            id="signup-phone"
-            type="tel"
-            placeholder="+1 555 012 3456"
-            autoComplete="tel"
-          />
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
-            <Label htmlFor="birth-date">Date of birth</Label>
-            <DatePicker
-              id="birth-date"
-              value={dateOfBirth}
-              onValueChange={(date) => {
-                setDateOfBirth(date);
-                setInvalidField(null);
-              }}
-              invalid={invalidField === "birth-date"}
+          <div className="flex flex-col gap-1.5">
+            <Label className="text-[13px] leading-4 font-semibold" htmlFor="signup-phone">
+              Phone number
+            </Label>
+            <RequiredInput
+              field="signup-phone"
+              invalidField={invalidField}
+              clearInvalidField={() => setInvalidField(null)}
+              id="signup-phone"
+              type="tel"
+              placeholder="+1 555 012 3456"
+              autoComplete="tel"
+              className="h-10 px-3.5"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="signup-password">Password</Label>
+
+          <div className="flex flex-col gap-1.5">
+            <Label className="text-[13px] leading-4 font-semibold" htmlFor="signup-password">
+              Password
+            </Label>
             <RequiredInput
               field="signup-password"
               invalidField={invalidField}
               clearInvalidField={() => setInvalidField(null)}
               id="signup-password"
               type="password"
+              placeholder="Password"
               autoComplete="new-password"
+              className="h-10 px-3.5"
             />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="address">Home address</Label>
-          <RequiredInput
-            field="address"
-            invalidField={invalidField}
-            clearInvalidField={() => setInvalidField(null)}
-            id="address"
-            placeholder="Street, city, postal code"
-            autoComplete="street-address"
-          />
-        </div>
-
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="h-11 w-full rounded-[10px] font-semibold">
           Continue to email verification
           <ArrowRight />
         </Button>

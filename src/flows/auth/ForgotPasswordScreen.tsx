@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Link } from "@tanstack/react-router";
-import { CircleCheck } from "lucide-react";
+import { ArrowRight, CircleCheck } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,16 +28,11 @@ export default function ForgotPasswordScreen() {
 
   return (
     <AuthShell
-      eyebrow="Password recovery"
       title="Reset your password"
       description="We’ll send a password reset link or SMS code, depending on your account settings."
-      footer={
-        <Link to="/auth/sign-in" className="font-medium text-primary hover:underline">
-          Back to sign in
-        </Link>
-      }
+      backTo="/auth/sign-in"
     >
-      <form className="space-y-5" noValidate onSubmit={submit}>
+      <form className="flex flex-col gap-6" noValidate onSubmit={submit}>
         {sent ? (
           <Alert>
             <CircleCheck />
@@ -49,8 +43,13 @@ export default function ForgotPasswordScreen() {
           </Alert>
         ) : null}
 
-        <div className="space-y-2">
-          <Label htmlFor="reset-identifier">Email address or phone number</Label>
+        <div className="flex flex-col gap-1.5">
+          <Label
+            className="text-[13px] leading-4 font-semibold"
+            htmlFor="reset-identifier"
+          >
+            Email address or phone number
+          </Label>
           <Tooltip open={invalid}>
             <TooltipTrigger asChild>
               <Input
@@ -60,6 +59,7 @@ export default function ForgotPasswordScreen() {
                 autoComplete="username"
                 aria-invalid={invalid || undefined}
                 onChange={() => setInvalid(false)}
+                className="h-10 px-3.5"
               />
             </TooltipTrigger>
             <TooltipContent side="bottom" sideOffset={8}>
@@ -68,8 +68,9 @@ export default function ForgotPasswordScreen() {
           </Tooltip>
         </div>
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="h-11 w-full rounded-[10px] font-semibold">
           Send reset instructions
+          <ArrowRight />
         </Button>
       </form>
     </AuthShell>
