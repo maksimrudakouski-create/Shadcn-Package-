@@ -12,7 +12,7 @@ export default function PhoneVerificationScreen() {
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     console.log("Mock phone verification submitted", { code });
-    navigate({ to: "/auth/sign-in" });
+    navigate({ to: "/onboarding/kyc" });
   }
 
   return (
@@ -50,7 +50,8 @@ export default function PhoneVerificationScreen() {
         <div className="flex flex-col items-center gap-4">
           <Button
             type="submit"
-            className="h-11 w-full rounded-[10px] font-semibold"
+            size="lg"
+            className="w-full rounded-[10px] font-semibold"
             disabled={code.length !== 6}
           >
             Verify phone number
@@ -62,7 +63,7 @@ export default function PhoneVerificationScreen() {
             <Button
               variant="link"
               type="button"
-              className="h-auto border-0 p-0 leading-4 font-bold text-foreground"
+              className="h-auto border-0 p-0 leading-4 font-medium text-foreground"
               onClick={() => console.log("Mock phone code resend")}
             >
               Resend code

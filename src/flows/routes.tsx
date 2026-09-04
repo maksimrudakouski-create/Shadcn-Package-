@@ -16,8 +16,19 @@ import EmailVerificationScreen from "./auth/EmailVerificationScreen";
 import ForgotPasswordScreen from "./auth/ForgotPasswordScreen";
 import PhoneVerificationScreen from "./auth/PhoneVerificationScreen";
 import SignInScreen from "./auth/SignInScreen";
+import SignInLoadingScreen from "./auth/SignInLoadingScreen";
+import NavigationLoadingScreen from "./loading/NavigationLoadingScreen";
 import SignUpScreen from "./auth/SignUpScreen";
 import StepUpScreen from "./auth/StepUpScreen";
+import CardsScreen from "./home/CardsScreen";
+import CardDetailsScreen from "./home/CardDetailsScreen";
+import HomeScreen from "./home/HomeScreen";
+import NotificationsScreen from "./home/NotificationsScreen";
+import ProfileScreen from "./home/ProfileScreen";
+import KycIntroScreen from "./onboarding/KycIntroScreen";
+import KycStatusScreen from "./onboarding/KycStatusScreen";
+import TransactionDetailsScreen from "./transactions/TransactionDetailsScreen";
+import TransactionsScreen from "./transactions/TransactionsScreen";
 
 export type FlowRoute = {
   /** "/" | "loans" | ":id". Nested under the parent's path. */
@@ -69,6 +80,11 @@ export const routes: FlowRoute[] = [
         meta: { role: "guest", flow: "Account access", label: "Sign in" },
       },
       {
+        path: "loading",
+        component: SignInLoadingScreen,
+        meta: { role: "guest", flow: "Account access", label: "Preparing home" },
+      },
+      {
         path: "forgot-password",
         component: ForgotPasswordScreen,
         meta: { role: "guest", flow: "Account access", label: "Reset password" },
@@ -77,6 +93,87 @@ export const routes: FlowRoute[] = [
         path: "step-up",
         component: StepUpScreen,
         meta: { role: "guest", flow: "Account access", label: "Secure sign-in" },
+      },
+    ],
+  },
+  {
+    path: "onboarding",
+    children: [
+      {
+        path: "kyc",
+        component: KycIntroScreen,
+        meta: { role: "user", flow: "Onboarding and KYC", label: "Prepare identity check" },
+        children: [
+          {
+            path: ":status",
+            component: KycStatusScreen,
+            meta: {
+              role: "user",
+              flow: "Onboarding and KYC",
+              label: "KYC status",
+              sampleParams: { status: "pending" },
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: "loading",
+    children: [
+      {
+        path: ":destination",
+        component: NavigationLoadingScreen,
+        meta: {
+          role: "user",
+          flow: "Profile and dashboard",
+          label: "Preparing destination",
+          sampleParams: { destination: "activity" },
+        },
+      },
+    ],
+  },
+  {
+    path: "home",
+    component: HomeScreen,
+    meta: { role: "user", flow: "Profile and dashboard", label: "Home dashboard" },
+  },
+  {
+    path: "notifications",
+    component: NotificationsScreen,
+    meta: { role: "user", flow: "Profile and dashboard", label: "Notification center" },
+  },
+  {
+    path: "cards",
+    component: CardsScreen,
+    meta: { role: "user", flow: "Profile and dashboard", label: "Cards" },
+    children: [
+      {
+        path: ":id",
+        component: CardDetailsScreen,
+        meta: {
+          role: "user",
+          flow: "Card issuing and management",
+          label: "Manage card",
+          sampleParams: { id: "physical-7358" },
+        },
+      },
+    ],
+  },
+  {
+    path: "profile",
+    component: ProfileScreen,
+    meta: { role: "user", flow: "Profile and dashboard", label: "User profile" },
+  },
+  {
+    path: "transactions",
+    component: TransactionsScreen,
+    meta: { role: "user", flow: "Transactions", label: "Transactions" },
+    children: [
+      {
+        path: ":id",
+        component: TransactionDetailsScreen,
+        meta: { role: "user", flow: "Transactions", label: "Transaction details", sampleParams: { id: "tx-8012" } },
       },
     ],
   },

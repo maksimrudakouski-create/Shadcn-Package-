@@ -76,7 +76,7 @@ export default function SignUpScreen() {
       footer={
         <>
           Already have an account?{" "}
-          <Link to="/auth/sign-in" className="font-bold text-foreground hover:underline">
+          <Link to="/auth/sign-in" className="font-medium text-foreground hover:underline">
             Sign in
           </Link>
         </>
@@ -179,7 +179,7 @@ export default function SignUpScreen() {
           </div>
         </div>
 
-        <Button type="submit" className="h-11 w-full rounded-[10px] font-semibold">
+        <Button type="submit" size="lg" className="w-full rounded-[10px] font-semibold">
           Continue to email verification
           <ArrowRight />
         </Button>

@@ -13,6 +13,7 @@ type AuthShellProps = {
   children: ReactNode;
   footer?: ReactNode;
   backTo?: string;
+  compactContentGap?: boolean;
 };
 
 export function AuthShell({
@@ -22,15 +23,17 @@ export function AuthShell({
   children,
   footer,
   backTo,
+  compactContentGap = false,
 }: AuthShellProps) {
   return (
     <TooltipProvider>
-      <main className="flex min-h-svh items-center justify-center bg-auth-surface bg-auth-canvas bg-size-[8.17rem_7.07rem,8.17rem_7.07rem,auto] px-4 py-10">
+      <main className="flex min-h-svh items-center justify-center bg-background px-4 py-10">
         <div className="w-full max-w-[450px]">
           <Card
             className={cn(
               "gap-6 border-border/70 bg-card py-8 shadow-xl shadow-primary/5 [--card-spacing:2rem]",
-              eyebrow && "gap-7",
+              eyebrow && !compactContentGap && "gap-7",
+              compactContentGap && "gap-4",
             )}
           >
             <CardHeader

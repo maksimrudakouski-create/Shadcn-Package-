@@ -28,7 +28,7 @@ export default function SignInScreen() {
     }
 
     console.log("Mock sign-in submitted");
-    navigate({ to: "/auth/step-up" });
+    navigate({ to: "/auth/loading" });
   }
 
   return (
@@ -38,7 +38,7 @@ export default function SignInScreen() {
       footer={
         <>
           New here?{" "}
-          <Link to="/auth/sign-up" className="font-bold text-foreground hover:underline">
+          <Link to="/auth/sign-up" className="font-medium text-foreground hover:underline">
             Create an account
           </Link>
         </>
@@ -74,7 +74,7 @@ export default function SignInScreen() {
             </Label>
             <Link
               to="/auth/forgot-password"
-              className="text-[13px] leading-4 font-bold text-foreground hover:underline"
+              className="text-[13px] leading-4 font-medium text-foreground hover:underline"
             >
               Forgot password?
             </Link>
@@ -97,7 +97,7 @@ export default function SignInScreen() {
           </Tooltip>
         </div>
 
-        <Button type="submit" className="h-11 w-full rounded-[10px] font-semibold">
+        <Button type="submit" size="lg" className="w-full rounded-[10px] font-semibold">
           Sign in
           <ArrowRight />
         </Button>
@@ -111,7 +111,8 @@ export default function SignInScreen() {
 
       <Button
         variant="outline"
-        className="h-11 w-full rounded-[10px] font-semibold"
+        size="lg"
+        className="w-full rounded-[10px] font-semibold"
         onClick={() => navigate({ to: "/auth/step-up" })}
       >
         <KeyRound />

@@ -14,9 +14,10 @@ export default function StepUpScreen() {
       title="Confirm it’s you"
       description="This sign-in needs an extra verification step to protect your account."
       backTo="/auth/sign-in"
+      compactContentGap
     >
-      <div className="space-y-5">
-        <Alert className="border-0 bg-muted/60 px-4 py-3">
+      <div className="flex flex-col gap-5">
+        <Alert className="mb-2 border-0 bg-muted/60 px-4 py-3">
           <ShieldCheck className="text-muted-foreground" />
           <AlertTitle className="text-[13px] leading-4 font-semibold">
             Extra protection is active

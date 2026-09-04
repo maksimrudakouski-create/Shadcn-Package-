@@ -45,6 +45,16 @@
  * including all of shadcn's own. */
 @custom-variant dark (&:is(.dark *));
 
+@keyframes northstar-logo-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -85,6 +95,9 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-auth-surface: var(--auth-surface);
   --background-image-auth-canvas: var(--auth-canvas);
+  --color-balance-card-foreground: var(--balance-card-foreground);
+  --background-image-balance-card: var(--balance-card);
+  --color-card-art-overlay: var(--card-art-overlay);
   --font-heading: var(--font-sans);
   --font-sans: 'Geist Variable', sans-serif;
   --radius-2xl: calc(var(--radius) * 1.8);
@@ -96,7 +109,7 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(1 0 0);
+  --background: oklch(0.988087 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -143,6 +156,9 @@
     linear-gradient(oklch(0.65 0.025 270 / 7%) 1px, transparent 1px),
     linear-gradient(90deg, oklch(0.65 0.025 270 / 7%) 1px, transparent 1px),
     linear-gradient(101deg, oklch(0.95 0.018 278) 9%, oklch(0.979 0.006 250) 91%);
+  --balance-card: linear-gradient(135deg, oklch(0.39 0.2 284), oklch(0.55 0.19 244));
+  --balance-card-foreground: oklch(0.985 0 0);
+  --card-art-overlay: oklch(0.12 0.03 270 / 28%);
 }
 
 /* ── Dark ──
@@ -193,6 +209,9 @@
     linear-gradient(oklch(0.85 0.03 280 / 7%) 1px, transparent 1px),
     linear-gradient(90deg, oklch(0.85 0.03 280 / 7%) 1px, transparent 1px),
     linear-gradient(101deg, oklch(0.18 0.018 285) 9%, oklch(0.15 0.012 260) 91%);
+  --balance-card: linear-gradient(135deg, oklch(0.32 0.17 284), oklch(0.45 0.16 244));
+  --balance-card-foreground: oklch(0.985 0 0);
+  --card-art-overlay: oklch(0.12 0.03 270 / 28%);
 }
 
 @layer base {

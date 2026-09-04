@@ -68,7 +68,7 @@ export default function ForgotPasswordScreen() {
           </Tooltip>
         </div>
 
-        <Button type="submit" className="h-11 w-full rounded-[10px] font-semibold">
+        <Button type="submit" size="lg" className="w-full rounded-[10px] font-semibold">
           Send reset instructions
           <ArrowRight />
         </Button>

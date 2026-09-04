@@ -50,7 +50,8 @@ export default function EmailVerificationScreen() {
         <div className="flex flex-col items-center gap-4">
           <Button
             type="submit"
-            className="h-11 w-full rounded-[10px] font-semibold"
+            size="lg"
+            className="w-full rounded-[10px] font-semibold"
             disabled={code.length !== 6}
           >
             Verify email
@@ -62,7 +63,7 @@ export default function EmailVerificationScreen() {
             <Button
               variant="link"
               type="button"
-              className="h-auto border-0 p-0 leading-4 font-bold text-foreground"
+              className="h-auto border-0 p-0 leading-4 font-medium text-foreground"
               onClick={() => console.log("Mock email code resend")}
             >
               Send a new code
