@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" role="img" aria-labelledby="title desc">
+  <title id="title">Анимированный мешок с золотом</title>
+  <desc id="desc">Коричневый мешок, перевязанный жёлтой верёвкой, плавно подпрыгивает и покачивается.</desc>
+  <style>
+    .sack { animation: bounce 2.8s cubic-bezier(.35,.05,.25,1) infinite; transform-origin: 120px 213px; }
+    .tie { animation: twitch 1.45s ease-in-out infinite; transform-origin: 120px 93px; }
+    .tail-left { animation: tail-left 1.45s ease-in-out infinite; transform-origin: 91px 104px; }
+    .tail-right { animation: tail-right 1.45s ease-in-out infinite; transform-origin: 148px 103px; }
+    .coin { animation: glint 2.8s ease-in-out infinite; transform-origin: center; }
+    .coin-two { animation-delay: .55s; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      18% { transform: translateY(2px) rotate(-1.8deg); }
+      42% { transform: translateY(-17px) rotate(1.8deg); }
+      62% { transform: translateY(-5px) rotate(-.8deg); }
+      78% { transform: translateY(1px) rotate(.5deg); }
+    }
+    @keyframes twitch {
+      0%, 100% { transform: rotate(0deg) scaleX(1); }
+      28% { transform: rotate(-4deg) scaleX(.96); }
+      55% { transform: rotate(4deg) scaleX(1.04); }
+      75% { transform: rotate(-1deg) scaleX(.99); }
+    }
+    @keyframes tail-left { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-9deg); } }
+    @keyframes tail-right { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(9deg); } }
+    @keyframes glint { 0%,35%,100% { opacity:.25; transform: scale(.7); } 52% { opacity:1; transform:scale(1.15); } }
+    @media (prefers-reduced-motion: reduce) { .sack,.tie,.tail-left,.tail-right,.coin { animation: none; } }
+  </style>
+  <defs>
+    <linearGradient id="sack" x1="68" y1="69" x2="176" y2="219" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B86A30"/><stop offset=".48" stop-color="#8B4824"/><stop offset="1" stop-color="#613119"/>
+    </linearGradient>
+    <linearGradient id="neck" x1="0" x2="1">
+      <stop stop-color="#CF7D3B"/><stop offset=".55" stop-color="#9F5328"/><stop offset="1" stop-color="#723719"/>
+    </linearGradient>
+    <linearGradient id="rope" x1="0" x2="1">
+      <stop stop-color="#FFE680"/><stop offset=".45" stop-color="#F5BD35"/><stop offset="1" stop-color="#CD8616"/>
+    </linearGradient>
+    <filter id="shadow" x="-35%" y="-25%" width="170%" height="170%"><feDropShadow dx="0" dy="9" stdDeviation="7" flood-color="#4B260F" flood-opacity=".22"/></filter>
+  </defs>
+  <ellipse cx="120" cy="225" rx="65" ry="12" fill="#5F361D" opacity=".16"/>
+  <g class="sack" filter="url(#shadow)">
+    <path d="M92 111c-15 16-29 42-29 72 0 28 23 41 57 41s57-13 57-41c0-30-14-56-29-72Z" fill="url(#sack)"/>
+    <path d="M78 172c4 30 28 43 52 43 18 0 32-5 42-15-10 16-29 24-52 24-34 0-57-13-57-41 0-30 14-56 29-72h9c-13 20-27 39-23 61Z" fill="#512817" opacity=".28"/>
+    <path d="M94 106c-4-12-13-23-5-42 8 14 16 20 31 21 14-1 23-7 31-21 8 19-1 30-5 42Z" fill="url(#neck)"/>
+    <path d="M102 75c4 9 10 15 18 15 9 0 15-6 19-15" fill="none" stroke="#E8A958" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+    <g class="tie">
+      <path d="M84 99c23 9 49 10 72 0v13c-24 10-49 10-72 0Z" fill="url(#rope)"/>
+      <path d="M88 103c21 7 42 7 64 0M89 109c20 7 41 7 62 0" fill="none" stroke="#A96B14" stroke-width="1.5" opacity=".58"/>
+      <ellipse cx="120" cy="107" rx="9" ry="8" fill="#F8C540" stroke="#B97813" stroke-width="2"/>
+      <path class="tail-left" d="M113 108c-13 0-26 3-31 15 13-2 23-7 31-12Z" fill="#EDB52B" stroke="#B97813" stroke-width="2" stroke-linejoin="round"/>
+      <path class="tail-right" d="M127 108c13 0 26 3 31 15-13-2-23-7-31-12Z" fill="#EDB52B" stroke="#B97813" stroke-width="2" stroke-linejoin="round"/>
+    </g>
+    <path d="M100 134c-13 18-17 48-8 66M141 132c14 19 18 48 8 68" fill="none" stroke="#D28746" stroke-width="3" stroke-linecap="round" opacity=".34"/>
+    <path d="M118 145v49M104 153c10 4 22 4 32 0" fill="none" stroke="#F2B85B" stroke-width="2.5" stroke-linecap="round" opacity=".22"/>
+    <ellipse cx="120" cy="182" rx="25" ry="25" fill="#EAB532" stroke="#A86A11" stroke-width="3"/>
+    <path d="M125 163c-5-4-15-2-15 6 0 11 19 6 19 18 0 8-12 11-19 5m10-33v45" fill="none" stroke="#FFF0A1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g class="coin" fill="#FFD85C"><path d="m187 83 3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><circle cx="174" cy="66" r="4"/></g>
+  <g class="coin coin-two" fill="#F1B832"><path d="m54 132 2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z"/></g>
+</svg>

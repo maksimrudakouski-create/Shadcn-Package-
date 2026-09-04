@@ -36,7 +36,7 @@ export default function KycStatusScreen() {
   const Icon = content.icon;
 
   return (
-    <main className="flex min-h-svh items-center justify-center bg-background px-4 py-12">
+    <main className="flex min-h-svh items-center justify-center bg-background bg-app-canvas bg-[length:20px_20px] px-4 py-12">
       <Card className="w-full max-w-[450px] gap-0 py-0 shadow-lg">
         <CardHeader className="items-center gap-4 px-6 pt-9 pb-1 text-center sm:px-10">
           {status !== "pending" ? (

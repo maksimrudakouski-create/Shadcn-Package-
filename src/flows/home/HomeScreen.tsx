@@ -1,7 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowDownLeft, ArrowRight, ArrowUpRight, Bell, CreditCard, Download, Eye, Plus } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import { ArrowDownLeft, ArrowRight, ArrowUpRight, CreditCard, Download, Eye, Plus, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -13,17 +11,20 @@ const activity = [
   { name: "Avery Wilson", detail: "Sep 1 · Transfer", amount: "− $120.00", icon: ArrowUpRight },
 ];
 
+const cards = [
+  { id: "virtual-4821", name: "Everyday", type: "Virtual debit", last4: "4821", expiry: "09/30", icon: Smartphone, artwork: "/card-art/everyday-orbits.jpg" },
+  { id: "physical-7358", name: "Travel", type: "Physical debit", last4: "7358", expiry: "04/31", icon: CreditCard, artwork: "/card-art/travel-horizon.jpg" },
+  { id: "virtual-1094", name: "Subscriptions", type: "Virtual debit", last4: "1094", expiry: "11/29", icon: Smartphone, artwork: "/card-art/subscriptions-ribbons.jpg" },
+];
+
 export default function HomeScreen() {
   return (
     <FinanceShell>
-      <div className="mb-8 flex items-center justify-between gap-4">
+      <div className="mb-8">
         <div>
           <p className="text-sm font-medium text-muted-foreground">Thursday, September 4</p>
           <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Good evening, Maksim</h1>
         </div>
-        <Avatar className="size-11">
-          <AvatarFallback>MR</AvatarFallback>
-        </Avatar>
       </div>
 
       <div className="grid gap-5 lg:grid-cols-[1.45fr_0.75fr]">
@@ -80,43 +81,34 @@ export default function HomeScreen() {
           </Card>
         </div>
 
-        <div className="space-y-5">
-          <Card>
+        <div className="flex">
+          <Card className="flex-1">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Bell className="size-4" /> Notifications</CardTitle>
-              <CardDescription>2 items need your attention</CardDescription>
+              <CardTitle>Your cards</CardTitle>
+              <CardDescription>3 active cards</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-xl bg-secondary p-4">
-                <Badge className="mb-2" variant="outline">Account</Badge>
-                <p className="font-semibold">Identity verified</p>
-                <p className="mt-1 text-sm leading-5 text-muted-foreground">Your account is active and ready to use.</p>
-              </div>
-              <div className="rounded-xl border p-4">
-                <Badge className="mb-2" variant="outline">Security</Badge>
-                <p className="font-semibold">Review your security settings</p>
-                <p className="mt-1 text-sm leading-5 text-muted-foreground">Add a trusted device for faster sign-ins.</p>
-              </div>
-              <Button asChild variant="ghost" className="w-full">
-                <Link to="/notifications">Open notification center <ArrowRight /></Link>
-              </Button>
-            </CardContent>
-          </Card>
+            <CardContent className="flex flex-1 flex-col gap-3">
+              {cards.map((card) => {
+                const Icon = card.icon;
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Your card</CardTitle>
-              <CardDescription>Virtual debit · Active</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-xl border bg-muted/50 p-5">
-                <div className="flex items-center justify-between">
-                  <CreditCard className="size-6" />
-                  <span className="text-xs font-semibold tracking-wider">NORTHSTAR</span>
-                </div>
-                <p className="mt-10 font-mono text-lg tracking-widest">••••  ••••  ••••  4821</p>
-                <div className="mt-4 flex justify-between text-xs text-muted-foreground"><span>ALEX MORGAN</span><span>09/30</span></div>
-              </div>
+                return (
+                  <Link
+                    key={card.id}
+                    to={`/cards/${card.id}`}
+                    className="relative flex flex-1 flex-col justify-between overflow-hidden rounded-xl border p-4 text-balance-card-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring"
+                    aria-label={`Open ${card.name} card details`}
+                  >
+                    <img src={card.artwork} alt="" className="absolute inset-0 size-full object-cover" />
+                    <div className="absolute inset-0 bg-card-art-overlay" />
+                    <div className="relative flex items-center justify-between">
+                      <div className="flex items-center gap-2"><Icon className="size-5" /><span className="font-semibold">{card.name}</span></div>
+                      <span className="text-xs font-semibold tracking-wider">NORTHSTAR</span>
+                    </div>
+                    <p className="relative mt-6 font-mono text-base tracking-[0.15em]">••••  ••••  ••••  {card.last4}</p>
+                    <div className="relative mt-3 flex justify-between text-xs text-balance-card-foreground/70"><span>{card.type}</span><span>{card.expiry}</span></div>
+                  </Link>
+                );
+              })}
             </CardContent>
           </Card>
         </div>

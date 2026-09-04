@@ -17,6 +17,8 @@ const initialDetails = {
   address: "21 Market Street, New York",
 };
 
+const defaultAvatarUrl = "/avatars/maksim-rudakouski.png";
+
 const detailFields = [
   { key: "email", label: "Email", type: "email", autoComplete: "email" },
   { key: "phone", label: "Phone", type: "tel", autoComplete: "tel" },
@@ -66,7 +68,7 @@ export default function ProfileScreen() {
           <CardContent className="flex flex-col items-start gap-5 pt-6 pb-8 sm:flex-row sm:items-center">
             <div className="relative shrink-0">
               <Avatar className="size-16">
-                {avatarUrl ? <AvatarImage src={avatarUrl} alt="Maksim Rudakouski" /> : null}
+                <AvatarImage src={avatarUrl ?? defaultAvatarUrl} alt="Maksim Rudakouski" />
                 <AvatarFallback className="text-lg">MR</AvatarFallback>
               </Avatar>
               <Input

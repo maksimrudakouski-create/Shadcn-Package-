@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 205" role="img" aria-labelledby="title desc">
+  <title id="title">Метка сокровища</title>
+  <desc id="desc">Пунктирная линия ведёт к крестику. Под ним написано: The treasure is here.</desc>
+  <style>
+    .route { animation: dash 2.6s linear infinite; }
+    .marker { animation: marker 2.6s ease-in-out infinite; transform-origin: 326px 104px; }
+    @keyframes dash { to { stroke-dashoffset: -34; } }
+    @keyframes marker { 0%,100% { transform: scale(1) rotate(0deg); } 52% { transform: scale(1.11) rotate(4deg); } 70% { transform: scale(.98) rotate(-2deg); } }
+    @media (prefers-reduced-motion: reduce) { .route,.marker { animation:none; } }
+  </style>
+  <defs>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#1D2025" flood-opacity=".18"/></filter>
+  </defs>
+  <path class="route" d="M69 61c69-5 80 64 143 47 49-13 46-60 98-31" fill="none" stroke="#7E858D" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 13"/>
+  <g class="marker" filter="url(#shadow)">
+    <path d="M310 76c6 7 10 11 16 17 5 5 10 10 16 15M342 76c-5 7-10 11-15 17-6 6-11 10-17 15" fill="none" stroke="#D14343" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M311 78c6 6 11 12 16 16M340 78c-5 6-9 10-14 15" fill="none" stroke="#F08A8A" stroke-width="1.4" stroke-linecap="round" opacity=".75"/>
+  </g>
+  <g filter="url(#shadow)" opacity=".5">
+    <path d="M353 96c1-15 11-24 27-24 15 0 25 9 27 24l-2 26c-9 5-40 5-50 0Z" fill="#D7DBDF" stroke="#464C53" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M354 96c15 3 36 3 52 0M354 105c15 3 36 3 52 0" fill="none" stroke="#555B63" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M360 95c2-11 10-17 20-17s18 6 20 17M363 109v13m34-13-1 13" fill="none" stroke="#858B92" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M376 101c0-4 7-4 7 0v4h4v10h-15v-10h4Z" fill="#C0C5CA" stroke="#464C53" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M379 108v3M357 99c5 1 9 1 13 0m21 0c5 1 9 0 13-1M360 120c11 3 27 3 39 0" fill="none" stroke="#30353B" stroke-width="1" stroke-linecap="round" opacity=".65"/>
+  </g>
+  <text x="326" y="157" text-anchor="middle" fill="#3F454C" font-family="Pirata One, Papyrus, Bradley Hand, URW Chancery L, cursive" font-size="20" font-weight="700" letter-spacing=".5">The treasure is here.</text>
+</svg>

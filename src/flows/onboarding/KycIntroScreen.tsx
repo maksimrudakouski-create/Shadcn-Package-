@@ -13,7 +13,7 @@ export default function KycIntroScreen() {
   const navigate = useNavigate();
 
   return (
-    <main className="flex min-h-svh items-center justify-center bg-background px-4 py-10">
+    <main className="flex min-h-svh items-center justify-center bg-background bg-app-canvas bg-[length:20px_20px] px-4 py-10">
       <div className="w-full max-w-[450px]">
         <Card className="gap-0 py-0 shadow-xl shadow-primary/5">
           <CardHeader className="items-center gap-3 px-6 py-8 text-center sm:px-10 sm:py-10">
